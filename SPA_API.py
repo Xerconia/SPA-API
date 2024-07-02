@@ -74,10 +74,22 @@ def clear_user_threads():
 
         # Clear the dictionary
         user_threads.clear()
+        
+# Function to start the Socket Mode client and handle disconnects
+def start_socket_mode_client():
+    while True:
+        if not socket_mode_client.is_connected():
+            try:
+                socket_mode_client.connect()
+                print("Socket Mode Connected")
+            except Exception as e:
+                print(f"Error connecting to Slack: {e}")
+                print("Reconnecting in 5 seconds...")
+        time.sleep(5)
 
 if __name__ == "__main__":
     
     # Start the background thread
     Thread(target=clear_user_threads).start()
-    socket_mode_client.connect()
+    Thread(target=start_socket_mode_client).start()
     app.run(debug=True)
