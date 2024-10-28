@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>SPA-API</Name>
     <RootNamespace>SPA-API</RootNamespace>
-    <InterpreterId>MSBuild|slack-ai|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|slackapienv|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,18 +26,19 @@
     <Compile Include="SPA_API.py" />
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="slack-ai\">
-      <Id>slack-ai</Id>
+    <Content Include=".env" />
+    <Content Include="requirements.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="slackapienv\">
+      <Id>slackapienv</Id>
       <Version>3.9</Version>
-      <Description>slack-ai (Python 3.9 (64-bit))</Description>
+      <Description>slackapienv (Python 3.9 (64-bit))</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>X64</Architecture>
     </Interpreter>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include=".env" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
